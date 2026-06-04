@@ -1,0 +1,10 @@
+# Publishing is driven by the "files" allowlist in package.json (only "dist"
+# is shipped), so this file is a backstop. Anything not under dist/ stays out
+# of the published tarball.
+/src
+/tests
+/index.ts
+node_modules
+eslint*
+tsconfig.json
+.github
