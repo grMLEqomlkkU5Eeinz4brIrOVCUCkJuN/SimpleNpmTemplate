@@ -3,17 +3,32 @@ name: CI
 on:
   push:
     branches: [master, dev]
+    paths-ignore:
+      - "**.md"
   pull_request:
     branches: [master]
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+
+# Cancel superseded runs on the same ref to save CI minutes.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   test:
-    name: Lint, Test & Build
-    runs-on: ubuntu-latest
+    name: Lint, Test & Build (${{ matrix.os }}, node ${{ matrix.node-version }})
+    runs-on: ${{ matrix.os }}
 
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [22.x]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [22.x, 24.x]
 
     steps:
       - name: Checkout code
@@ -40,9 +55,13 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Generate API docs
+        if: matrix.os == 'ubuntu-latest' && matrix.node-version == '22.x'
+        run: npm run docs
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v7
-        if: matrix.node-version == '22.x'
+        if: matrix.os == 'ubuntu-latest' && matrix.node-version == '22.x'
         with:
           name: dist
           path: dist/

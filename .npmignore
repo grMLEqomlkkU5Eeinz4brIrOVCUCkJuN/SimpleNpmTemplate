@@ -4,7 +4,15 @@
 /src
 /tests
 /index.ts
+/docs
 node_modules
 eslint*
 tsconfig.json
+typedoc.json
+cliff.toml
+lefthook.yml
+commitlint.config.js
+release.sh
+.nvmrc
+.vscode
 .github

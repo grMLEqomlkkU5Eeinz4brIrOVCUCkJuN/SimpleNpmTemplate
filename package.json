@@ -18,7 +18,11 @@
 		"build": "tsc",
 		"typecheck": "tsc --noEmit",
 		"lint": "eslint .",
-		"test": "node --import tsx --test \"tests/**/*.test.ts\""
+		"lint:fix": "eslint . --fix",
+		"test": "node --import tsx --test \"tests/**/*.test.ts\"",
+		"docs": "typedoc",
+		"changelog": "git-cliff -o CHANGELOG.md",
+		"prepare": "lefthook install"
 	},
 	"keywords": [
 		"typescript",
@@ -33,9 +37,15 @@
 		"url": "git+https://github.com/grMLEqomlkkU5Eeinz4brIrOVCUCkJuN/lib-template.git"
 	},
 	"devDependencies": {
+		"@commitlint/cli": "^20.1.0",
+		"@commitlint/config-conventional": "^20.1.0",
+		"@eslint/js": "^10.5.0",
 		"@types/node": "^25.9.3",
 		"eslint": "^10.5.0",
+		"git-cliff": "^2.10.1",
+		"lefthook": "^1.13.6",
 		"tsx": "^4.21.0",
+		"typedoc": "^0.28.14",
 		"typescript": "^6.0.2",
 		"typescript-eslint": "^8.61.1"
 	}
