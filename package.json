@@ -42,7 +42,7 @@
 		"@eslint/js": "^10.0.1",
 		"@types/node": "^26.1.0",
 		"eslint": "^10.6.0",
-		"git-cliff": "^2.10.1",
+		"git-cliff": "^2.14.2",
 		"lefthook": "^2.1.9",
 		"tsx": "^4.22.5",
 		"typedoc": "^0.28.14",
